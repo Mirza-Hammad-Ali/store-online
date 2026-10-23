@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom'
-import { FiArrowUpRight } from 'react-icons/fi'
-import CategorySection from '../components/CategorySection.jsx'
-import Hero from '../components/Hero.jsx'
-import ProductGrid from '../components/ProductGrid.jsx'
-import SectionHeading from '../components/SectionHeading.jsx'
-import StoryBanner from '../components/StoryBanner.jsx'
-import { products } from '../data/products.js'
+import { Link } from "react-router-dom";
+import { FiArrowUpRight } from "react-icons/fi";
+import CategorySection from "../components/CategorySection.jsx";
+import Hero from "../components/Hero.jsx";
+import ProductGrid from "../components/ProductGrid.jsx";
+import SectionHeading from "../components/SectionHeading.jsx";
+import StoryBanner from "../components/StoryBanner.jsx";
+import { products } from "../data/products.js";
 
 function HomePage({ onAddToBag }) {
   return (
@@ -38,7 +38,7 @@ function HomePage({ onAddToBag }) {
         </p>
       </section>
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;
