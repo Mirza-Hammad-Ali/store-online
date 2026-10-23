@@ -1,23 +1,23 @@
-import { useMemo, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import ProductGrid from '../components/ProductGrid.jsx'
-import { products } from '../data/products.js'
+import { useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import ProductGrid from "../components/ProductGrid.jsx";
+import { products } from "../data/products.js";
 
-const filters = ['All pieces', 'Wearables', 'Accessories', 'Living']
+const filters = ["All pieces", "Wearables", "Accessories", "Living"];
 
 function ShopPage({ onAddToBag }) {
-  const [searchParams] = useSearchParams()
-  const startingCategory = searchParams.get('category')
+  const [searchParams] = useSearchParams();
+  const startingCategory = searchParams.get("category");
   const [activeFilter, setActiveFilter] = useState(
-    filters.includes(startingCategory) ? startingCategory : 'All pieces',
-  )
+    filters.includes(startingCategory) ? startingCategory : "All pieces",
+  );
   const filteredProducts = useMemo(
     () =>
-      activeFilter === 'All pieces'
+      activeFilter === "All pieces"
         ? products
         : products.filter((product) => product.category === activeFilter),
     [activeFilter],
-  )
+  );
 
   return (
     <section className="page-fade mx-auto max-w-[1440px] px-5 pb-20 pt-12 sm:px-8 sm:pt-16 lg:px-14 lg:pb-28">
@@ -40,7 +40,10 @@ function ShopPage({ onAddToBag }) {
           </p>
         </div>
       </div>
-      <div className="flex flex-wrap gap-2 py-7 sm:py-9" aria-label="Filter products">
+      <div
+        className="flex flex-wrap gap-2 py-7 sm:py-9"
+        aria-label="Filter products"
+      >
         {filters.map((filter) => (
           <button
             key={filter}
@@ -49,8 +52,8 @@ function ShopPage({ onAddToBag }) {
             aria-pressed={activeFilter === filter}
             className={`rounded-full border px-4 py-2 text-[10px] font-medium transition-colors ${
               activeFilter === filter
-                ? 'border-[#4b5947] bg-[#4b5947] text-white'
-                : 'border-[#deddd5] text-[#64645b] hover:border-[#4b5947]'
+                ? "border-[#4b5947] bg-[#4b5947] text-white"
+                : "border-[#deddd5] text-[#64645b] hover:border-[#4b5947]"
             }`}
           >
             {filter}
@@ -59,7 +62,7 @@ function ShopPage({ onAddToBag }) {
       </div>
       <ProductGrid products={filteredProducts} onAddToCart={onAddToBag} />
     </section>
-  )
+  );
 }
 
-export default ShopPage
+export default ShopPage;
