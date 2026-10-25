@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import { FiArrowDown, FiArrowUpRight } from 'react-icons/fi'
+import { Link } from "react-router-dom";
+import { FiArrowDown, FiArrowUpRight } from "react-icons/fi";
 
 function Hero() {
   return (
@@ -43,7 +43,7 @@ function Hero() {
         </p>
       </div>
     </section>
-  )
+  );
 }
 
-export default Hero
+export default Hero;

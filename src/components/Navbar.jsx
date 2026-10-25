@@ -1,17 +1,17 @@
-import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { FiArrowUpRight, FiMenu, FiShoppingBag, FiX } from 'react-icons/fi'
+import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { FiArrowUpRight, FiMenu, FiShoppingBag, FiX } from "react-icons/fi";
 
 const links = [
-  { label: 'Shop', to: '/shop' },
-  { label: 'Our story', to: '/about' },
-  { label: 'Contact', to: '/contact' },
-]
+  { label: "Shop", to: "/shop" },
+  { label: "Our story", to: "/about" },
+  { label: "Contact", to: "/contact" },
+];
 
 function Navbar({ bagCount }) {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const closeMenu = () => setMenuOpen(false)
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <>
@@ -27,7 +27,7 @@ function Navbar({ bagCount }) {
           <button
             type="button"
             className="grid h-10 w-10 place-items-center text-xl md:hidden"
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
           >
@@ -48,7 +48,7 @@ function Navbar({ bagCount }) {
                 to={link.to}
                 className={({ isActive }) =>
                   `text-[12px] font-medium tracking-[0.04em] transition-colors hover:text-[#69745f] ${
-                    isActive ? 'text-[#69745f]' : 'text-[#66665e]'
+                    isActive ? "text-[#69745f]" : "text-[#66665e]"
                   }`
                 }
               >
@@ -88,7 +88,7 @@ function Navbar({ bagCount }) {
         )}
       </header>
     </>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

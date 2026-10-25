@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
-import { categories } from '../data/products.js'
-import SectionHeading from './SectionHeading.jsx'
+import { Link } from "react-router-dom";
+import { categories } from "../data/products.js";
+import SectionHeading from "./SectionHeading.jsx";
 
 function CategorySection() {
   return (
@@ -19,7 +19,7 @@ function CategorySection() {
             to={category.href}
             key={category.name}
             className={`group relative block overflow-hidden bg-[#e7e5de] ${
-              index === 1 ? 'sm:mt-8' : ''
+              index === 1 ? "sm:mt-8" : ""
             }`}
           >
             <div className="aspect-[4/5] overflow-hidden sm:aspect-[4/5.6]">
@@ -36,7 +36,9 @@ function CategorySection() {
                 <p className="font-display text-[25px] sm:text-[29px]">
                   {category.name}
                 </p>
-                <p className="mt-1 text-[11px] text-white/80">{category.detail}</p>
+                <p className="mt-1 text-[11px] text-white/80">
+                  {category.detail}
+                </p>
               </div>
               <span className="grid h-9 w-9 place-items-center rounded-full border border-white/60 transition-colors group-hover:bg-white group-hover:text-[#24251f]">
                 ↗
@@ -46,7 +48,7 @@ function CategorySection() {
         ))}
       </div>
     </section>
-  )
+  );
 }
 
-export default CategorySection
+export default CategorySection;

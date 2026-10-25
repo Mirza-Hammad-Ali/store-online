@@ -1,8 +1,8 @@
-function SectionHeading({ eyebrow, title, description, align = 'center' }) {
+function SectionHeading({ eyebrow, title, description, align = "center" }) {
   return (
     <div
       className={`${
-        align === 'left' ? 'text-left' : 'text-center'
+        align === "left" ? "text-left" : "text-center"
       } mb-8 sm:mb-10`}
     >
       {eyebrow && (
@@ -19,7 +19,7 @@ function SectionHeading({ eyebrow, title, description, align = 'center' }) {
         </p>
       )}
     </div>
-  )
+  );
 }
 
-export default SectionHeading
+export default SectionHeading;

@@ -1,4 +1,4 @@
-import ProductCard from './ProductCard.jsx'
+import ProductCard from "./ProductCard.jsx";
 
 function ProductGrid({ products, onAddToCart }) {
   return (
@@ -11,7 +11,7 @@ function ProductGrid({ products, onAddToCart }) {
         />
       ))}
     </div>
-  )
+  );
 }
 
-export default ProductGrid
+export default ProductGrid;

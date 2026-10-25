@@ -1,4 +1,4 @@
-import { FiArrowUpRight } from 'react-icons/fi'
+import { FiArrowUpRight } from "react-icons/fi";
 
 function ProductCard({ product, onAddToCart }) {
   return (
@@ -32,7 +32,7 @@ function ProductCard({ product, onAddToCart }) {
         <p className="pt-0.5 text-[12px] font-medium">${product.price}</p>
       </div>
     </article>
-  )
+  );
 }
 
-export default ProductCard
+export default ProductCard;
