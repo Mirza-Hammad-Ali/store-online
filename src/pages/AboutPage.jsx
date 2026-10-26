@@ -1,24 +1,24 @@
-import { Link } from 'react-router-dom'
-import { FiArrowUpRight } from 'react-icons/fi'
-import SectionHeading from '../components/SectionHeading.jsx'
+import { Link } from "react-router-dom";
+import { FiArrowUpRight } from "react-icons/fi";
+import SectionHeading from "../components/SectionHeading.jsx";
 
 const values = [
   {
-    number: '01',
-    title: 'Buy with intention',
-    body: 'We choose fewer things, and spend more time making sure each one deserves a place in your day.',
+    number: "01",
+    title: "Buy with intention",
+    body: "We choose fewer things, and spend more time making sure each one deserves a place in your day.",
   },
   {
-    number: '02',
-    title: 'Made to be kept',
-    body: 'Good materials, thoughtful details, and timeless shapes. We want you to reach for these years from now.',
+    number: "02",
+    title: "Made to be kept",
+    body: "Good materials, thoughtful details, and timeless shapes. We want you to reach for these years from now.",
   },
   {
-    number: '03',
-    title: 'People matter',
-    body: 'We partner with makers who care about their craft, their communities, and the world we share.',
+    number: "03",
+    title: "People matter",
+    body: "We partner with makers who care about their craft, their communities, and the world we share.",
   },
-]
+];
 
 function AboutPage() {
   return (
@@ -65,10 +65,15 @@ function AboutPage() {
           />
           <div className="grid gap-8 md:grid-cols-3 md:gap-10">
             {values.map((value) => (
-              <article key={value.number} className="border-t border-[#c9c9be] pt-5">
+              <article
+                key={value.number}
+                className="border-t border-[#c9c9be] pt-5"
+              >
                 <p className="text-[10px] text-[#818271]">{value.number}</p>
                 <h3 className="font-display mt-5 text-[24px]">{value.title}</h3>
-                <p className="mt-3 text-[12px] leading-6 text-[#6c6d63]">{value.body}</p>
+                <p className="mt-3 text-[12px] leading-6 text-[#6c6d63]">
+                  {value.body}
+                </p>
               </article>
             ))}
           </div>
@@ -81,7 +86,7 @@ function AboutPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
-export default AboutPage
+export default AboutPage;
