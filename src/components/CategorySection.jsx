@@ -50,5 +50,4 @@ function CategorySection() {
     </section>
   );
 }
-
 export default CategorySection;
