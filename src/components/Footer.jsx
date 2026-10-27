@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { FiArrowUpRight } from "react-icons/fi";
-
 function Footer() {
   return (
     <footer className="bg-[#30392e] text-white">
