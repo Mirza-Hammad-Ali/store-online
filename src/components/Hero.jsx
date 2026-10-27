@@ -13,7 +13,7 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#172018]/70 via-[#172018]/30 to-transparent" />
         <div className="relative flex min-h-[570px] max-w-[650px] flex-col items-start justify-center px-7 py-14 text-white sm:min-h-[620px] sm:px-14 lg:min-h-[660px] lg:px-[76px]">
           <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/80 sm:text-[11px]">
-            Considered goods for everyday
+            Considered good everyday
           </p>
           <h1 className="font-display max-w-[580px] text-[52px] font-medium leading-[1.04] tracking-[-0.04em] sm:text-[68px] lg:text-[78px]">
             Find joy in the <em>everyday.</em>
