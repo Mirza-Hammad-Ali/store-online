@@ -90,5 +90,4 @@ function Navbar({ bagCount }) {
     </>
   );
 }
-
 export default Navbar;
