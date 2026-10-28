@@ -10,10 +10,10 @@ const menuItems = [
 ];
 
 const stats = [
-  { title: "Total Products", value: "—", icon: "📦" },
-  { title: "Total Orders", value: "—", icon: "🛍️" },
-  { title: "Total Customers", value: "—", icon: "👥" },
-  { title: "Total Revenue", value: "—", icon: "💰" },
+  { title: "Total Products", value: "500" },
+  { title: "Total Orders", value: "334" },
+  { title: "Total Customers", value: "304" },
+  { title: "Total Revenue", value: "1000$" },
 ];
 
 export default function AdminDashboard() {
