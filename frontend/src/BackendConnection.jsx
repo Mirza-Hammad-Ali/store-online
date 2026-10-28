@@ -1,15 +1,12 @@
-
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { testBackend } from "./backendTest";
 
 export default function BackendConnection() {
-  const [status, setStatus] = useState("Connecting to backend...");
-
   useEffect(() => {
-    testBackend()
-      .then((data) => setStatus(data.message))
-      .catch(() => setStatus("Connection failed. Check your backend."));
+    testBackend().catch(() => {
+      // Connection errors are handled silently.
+    });
   }, []);
 
-  return <p>{status}</p>;
+  return null;
 }
