@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -17,10 +16,7 @@ export default function SignupPage() {
 
   if (user) {
     return (
-      <Navigate
-        to={user.role === "admin" ? "/admin" : "/account"}
-        replace
-      />
+      <Navigate to={user.role === "admin" ? "/admin" : "/account"} replace />
     );
   }
 
@@ -46,7 +42,9 @@ export default function SignupPage() {
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label htmlFor="name" className="mb-2 block">Full name</label>
+          <label htmlFor="name" className="mb-2 block">
+            Full name
+          </label>
           <input
             id="name"
             autoComplete="name"
@@ -58,7 +56,9 @@ export default function SignupPage() {
         </div>
 
         <div>
-          <label htmlFor="signup-email" className="mb-2 block">Email</label>
+          <label htmlFor="signup-email" className="mb-2 block">
+            Email
+          </label>
           <input
             id="signup-email"
             type="email"
@@ -71,7 +71,9 @@ export default function SignupPage() {
         </div>
 
         <div>
-          <label htmlFor="signup-password" className="mb-2 block">Password</label>
+          <label htmlFor="signup-password" className="mb-2 block">
+            Password
+          </label>
           <input
             id="signup-password"
             type="password"
@@ -89,7 +91,9 @@ export default function SignupPage() {
         </div>
 
         {error && (
-          <p role="alert" className="text-sm text-red-600">{error}</p>
+          <p role="alert" className="text-sm text-red-600">
+            {error}
+          </p>
         )}
 
         <button
@@ -102,7 +106,10 @@ export default function SignupPage() {
       </form>
 
       <p className="mt-6 text-sm">
-        Already registered? <Link className="underline" to="/login">Login</Link>
+        Already registered?{" "}
+        <Link className="underline" to="/login">
+          Login
+        </Link>
       </p>
     </section>
   );

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -17,10 +16,7 @@ export default function LoginPage() {
 
   if (user) {
     return (
-      <Navigate
-        to={user.role === "admin" ? "/admin" : "/account"}
-        replace
-      />
+      <Navigate to={user.role === "admin" ? "/admin" : "/account"} replace />
     );
   }
 
@@ -31,8 +27,7 @@ export default function LoginPage() {
 
     try {
       const account = await login(email, password);
-      const destination =
-        account.role === "admin" ? "/admin" : "/account";
+      const destination = account.role === "admin" ? "/admin" : "/account";
 
       navigate(destination, { replace: true });
     } catch (err) {
@@ -45,13 +40,13 @@ export default function LoginPage() {
   return (
     <section className="mx-auto max-w-md px-6 py-16">
       <h1 className="mb-2 text-3xl font-semibold">Welcome back</h1>
-      <p className="mb-8 text-gray-600">
-        Sign in to your store account.
-      </p>
+      <p className="mb-8 text-gray-600">Sign in to your store account.</p>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label htmlFor="email" className="mb-2 block">Email</label>
+          <label htmlFor="email" className="mb-2 block">
+            Email
+          </label>
           <input
             id="email"
             type="email"
@@ -64,7 +59,9 @@ export default function LoginPage() {
         </div>
 
         <div>
-          <label htmlFor="password" className="mb-2 block">Password</label>
+          <label htmlFor="password" className="mb-2 block">
+            Password
+          </label>
           <input
             id="password"
             type="password"
@@ -77,7 +74,9 @@ export default function LoginPage() {
         </div>
 
         {error && (
-          <p role="alert" className="text-sm text-red-600">{error}</p>
+          <p role="alert" className="text-sm text-red-600">
+            {error}
+          </p>
         )}
 
         <button
@@ -90,7 +89,10 @@ export default function LoginPage() {
       </form>
 
       <p className="mt-6 text-sm">
-        Don't have an account? <Link className="underline" to="/signup">Sign up</Link>
+        Don't have an account?{" "}
+        <Link className="underline" to="/signup">
+          Sign up
+        </Link>
       </p>
     </section>
   );
