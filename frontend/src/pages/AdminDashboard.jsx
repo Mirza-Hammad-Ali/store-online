@@ -58,7 +58,6 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
       <div className="flex min-h-screen">
-        {/* Sidebar */}
         <aside className="hidden w-64 shrink-0 flex-col bg-gray-950 text-white md:flex">
           <div className="border-b border-white/10 px-6 py-7">
             <h2 className="text-2xl font-extrabold tracking-wide">
@@ -66,7 +65,6 @@ export default function AdminDashboard() {
             </h2>
             <p className="mt-1 text-xs text-gray-400">ADMINISTRATION PANEL</p>
           </div>
-
           <nav className="flex-1 space-y-2 p-4">
             {menuItems.map((item) => (
               <button
@@ -83,7 +81,6 @@ export default function AdminDashboard() {
               </button>
             ))}
           </nav>
-
           <div className="border-t border-white/10 p-4">
             <p className="truncate text-sm font-semibold">
               {user?.name || "Administrator"}
@@ -97,8 +94,6 @@ export default function AdminDashboard() {
             </button>
           </div>
         </aside>
-
-        {/* Main Content */}
         <main className="min-w-0 flex-1">
           <header className="flex flex-wrap items-center justify-between gap-4 border-b bg-white px-5 py-5 sm:px-8">
             <div>
@@ -167,18 +162,15 @@ export default function AdminDashboard() {
                       {
                         title: "Products",
                         description: "Organize products, prices and stock.",
-                        icon: "📦",
                       },
                       {
                         title: "Orders",
                         description:
                           "Review customer purchases and delivery status.",
-                        icon: "🛒",
                       },
                       {
                         title: "Customers",
                         description: "Review customer accounts and activity.",
-                        icon: "👥",
                       },
                     ].map((item) => (
                       <button
