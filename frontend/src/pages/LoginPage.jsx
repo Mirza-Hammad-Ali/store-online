@@ -87,7 +87,6 @@ export default function LoginPage() {
           {busy ? "Signing in..." : "Login"}
         </button>
       </form>
-
       <p className="mt-6 text-sm">
         Don't have an account?{" "}
         <Link className="underline" to="/signup">
