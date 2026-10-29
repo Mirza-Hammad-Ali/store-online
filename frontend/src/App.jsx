@@ -54,7 +54,6 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
   const [bagCount, setBagCount] = useState(0);
-
   const addToBag = () => {
     setBagCount((count) => count + 1);
   };
