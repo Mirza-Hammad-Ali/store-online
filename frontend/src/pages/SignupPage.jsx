@@ -5,13 +5,11 @@ import { useAuth } from "../context/AuthContext";
 export default function SignupPage() {
   const { signup, user, loading } = useAuth();
   const navigate = useNavigate();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-
   if (loading) return <p className="p-6">Loading...</p>;
 
   if (user) {
