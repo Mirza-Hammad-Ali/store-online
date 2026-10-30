@@ -36,7 +36,6 @@ export default function LoginPage() {
       setBusy(false);
     }
   }
-
   return (
     <section className="mx-auto max-w-md px-6 py-16">
       <h1 className="mb-2 text-3xl font-semibold">Welcome back</h1>
@@ -57,7 +56,6 @@ export default function LoginPage() {
             className="w-full rounded-lg border p-3"
           />
         </div>
-
         <div>
           <label htmlFor="password" className="mb-2 block">
             Password
@@ -72,13 +70,11 @@ export default function LoginPage() {
             className="w-full rounded-lg border p-3"
           />
         </div>
-
         {error && (
           <p role="alert" className="text-sm text-red-600">
             {error}
           </p>
         )}
-
         <button
           type="submit"
           disabled={busy}
