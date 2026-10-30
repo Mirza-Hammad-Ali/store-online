@@ -1,15 +1,12 @@
 import { useState } from 'react'
 import { FiArrowUpRight, FiCheck } from 'react-icons/fi'
-
 function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
-
   function handleSubmit(event) {
     event.preventDefault()
     setSubmitted(true)
     event.currentTarget.reset()
   }
-
   return (
     <section className="page-fade mx-auto grid max-w-[1440px] gap-12 px-5 py-14 sm:px-8 sm:py-20 md:grid-cols-[0.9fr_1.1fr] lg:gap-24 lg:px-14 lg:py-24">
       <div>
