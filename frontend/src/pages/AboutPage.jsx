@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { FiArrowUpRight } from "react-icons/fi";
 import SectionHeading from "../components/SectionHeading.jsx";
-
 const values = [
   {
     number: "01",

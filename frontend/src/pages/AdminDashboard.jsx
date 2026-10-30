@@ -8,7 +8,6 @@ const menuItems = [
   { title: "Customers" },
   { title: "Settings" },
 ];
-
 const stats = [
   { title: "Total Products", value: "500" },
   { title: "Total Orders", value: "334" },
@@ -29,7 +28,6 @@ export default function AdminDashboard() {
       setMessage("Please log in again.");
       return;
     }
-
     setLoading(true);
     setMessage("");
 
