@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-
 export default function UserDashboard() {
   const { user, logout } = useAuth();
-
   return (
     <section className="mx-auto max-w-5xl px-6 py-12">
       <p className="text-sm text-gray-500">My Account</p>
