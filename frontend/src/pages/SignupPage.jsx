@@ -81,13 +81,11 @@ export default function SignupPage() {
             Use at least 8 characters.
           </p>
         </div>
-
         {error && (
           <p role="alert" className="text-sm text-red-600">
             {error}
           </p>
         )}
-
         <button
           type="submit"
           disabled={busy}
@@ -96,7 +94,6 @@ export default function SignupPage() {
           {busy ? "Creating account..." : "Create account"}
         </button>
       </form>
-
       <p className="mt-6 text-sm">
         Already registered?{" "}
         <Link className="underline" to="/login">
