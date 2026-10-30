@@ -2,9 +2,7 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import ProductGrid from "../components/ProductGrid.jsx";
 import { products } from "../data/products.js";
-
 const filters = ["All pieces", "Wearables", "Accessories", "Living"];
-
 function ShopPage({ onAddToBag }) {
   const [searchParams] = useSearchParams();
   const startingCategory = searchParams.get("category");
