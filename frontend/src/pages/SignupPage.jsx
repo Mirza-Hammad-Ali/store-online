@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-
 export default function SignupPage() {
   const { signup, user, loading } = useAuth();
   const navigate = useNavigate();
@@ -11,7 +10,6 @@ export default function SignupPage() {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   if (loading) return <p className="p-6">Loading...</p>;
-
   if (user) {
     return (
       <Navigate to={user.role === "admin" ? "/admin" : "/account"} replace />
@@ -32,12 +30,10 @@ export default function SignupPage() {
       setBusy(false);
     }
   }
-
   return (
     <section className="mx-auto max-w-md px-6 py-16">
       <h1 className="mb-2 text-3xl font-semibold">Create account</h1>
       <p className="mb-8 text-gray-600">Join our online store.</p>
-
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
           <label htmlFor="name" className="mb-2 block">
@@ -52,7 +48,6 @@ export default function SignupPage() {
             className="w-full rounded-lg border p-3"
           />
         </div>
-
         <div>
           <label htmlFor="signup-email" className="mb-2 block">
             Email
@@ -67,7 +62,6 @@ export default function SignupPage() {
             className="w-full rounded-lg border p-3"
           />
         </div>
-
         <div>
           <label htmlFor="signup-password" className="mb-2 block">
             Password
