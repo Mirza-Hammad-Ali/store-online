@@ -1,4 +1,3 @@
-
 const jwt = require("jsonwebtoken");
 
 function authenticate(req, res, next) {
@@ -6,11 +5,9 @@ function authenticate(req, res, next) {
   const token = authHeader?.startsWith("Bearer ")
     ? authHeader.split(" ")[1]
     : null;
-
   if (!token) {
     return res.status(401).json({ message: "Please log in." });
   }
-
   try {
     req.user = jwt.verify(token, process.env.JWT_SECRET);
     next();
