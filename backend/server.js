@@ -27,7 +27,7 @@ app.get("/api", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
-
+app.use("/api/products", productRoutes);
 const PORT = process.env.PORT || 5000;
 
 async function startServer() {
