@@ -1,4 +1,3 @@
-
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -6,7 +5,6 @@ const User = require("../models/user");
 const { authenticate, adminOnly } = require("../middleware/authMiddleware");
 
 const router = express.Router();
-
 function createToken(user) {
   return jwt.sign(
     {
