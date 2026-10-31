@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { FiArrowUpRight } from "react-icons/fi";
-
 function StoryBanner() {
   return (
     <section className="bg-[#e9e9e1]">
