@@ -155,18 +155,12 @@ export default function CartPage({ cart, updateQuantity, removeFromCart }) {
               <span>${total.toFixed(2)}</span>
             </div>
 
-            <button
-              type="button"
-              disabled
-              className="w-full cursor-not-allowed bg-[#4b5947] py-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-white opacity-70"
+            <Link
+              to="/checkout"
+              className="block w-full bg-[#4b5947] py-4 text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-[#394536]"
             >
-              <Link
-                to="/checkout"
-                className="block w-full bg-[#4b5947] text-white text-center py-4 hover:bg-[#394536] transition"
-              >
-                Proceed to Checkout
-              </Link>
-            </button>
+              Proceed to Checkout
+            </Link>
 
             <p className="mt-4 text-center text-[10px] leading-5 text-[#88877e]">
               Complimentary shipping on orders over $100.
