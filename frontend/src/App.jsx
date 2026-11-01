@@ -21,7 +21,10 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
   const [cart, setCart] = useState([]);
-
+  // Clear cart after successful order
+  const clearCart = () => {
+    setCart([]);
+  };
   // Add product to cart
   const addToBag = (product) => {
     setCart((previousCart) => {
@@ -86,8 +89,11 @@ function App() {
               }
             />
             {/* Checkout Page */}
-            <Route path="/checkout" element={<CheckoutPage cart={cart} />} />
 
+            <Route
+              path="/checkout"
+              element={<CheckoutPage cart={cart} onOrderSuccess={clearCart} />}
+            />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
 

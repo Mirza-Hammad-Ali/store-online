@@ -1,9 +1,9 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FiArrowLeft, FiLock } from "react-icons/fi";
+import { FiArrowLeft, FiLock, FiCheckCircle } from "react-icons/fi";
 
-export default function CheckoutPage({ cart }) {
+export default function CheckoutPage({ cart, onOrderSuccess }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -12,6 +12,10 @@ export default function CheckoutPage({ cart }) {
     city: "",
     postalCode: "",
   });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [order, setOrder] = useState(null);
 
   const subtotal = cart.reduce(
     (total, item) => total + Number(item.price) * item.quantity,
@@ -25,10 +29,92 @@ export default function CheckoutPage({ cart }) {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Checkout form ready! Next step: connect orders with MongoDB.");
+    setError("");
+
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+      setError("Please log in before placing your order.");
+      return;
+    }
+
+    const invalidProduct = cart.some(
+      (item) => !item.id || !item.quantity
+    );
+
+    if (invalidProduct) {
+      setError("A product in your cart has invalid information.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const response = await fetch("http://localhost:5000/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          items: cart.map((item) => ({
+            productId: item.id,
+            quantity: item.quantity,
+          })),
+          shippingAddress: form,
+          paymentMethod: "cash_on_delivery",
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to place order.");
+      }
+
+      setOrder(data.order);
+      onOrderSuccess();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  if (order) {
+    return (
+      <section className="min-h-[70vh] bg-[#faf9f6] flex items-center justify-center px-5">
+        <div className="max-w-lg w-full text-center">
+          <FiCheckCircle className="text-[#4b5947] text-6xl mx-auto mb-6" />
+
+          <h1 className="text-4xl font-serif text-[#24251f] mb-4">
+            Thank you for your order!
+          </h1>
+
+          <p className="text-gray-500 mb-5">
+            Your order has been placed successfully.
+          </p>
+
+          <p className="mb-2 text-sm">
+            Order ID: <strong>{order._id}</strong>
+          </p>
+
+          <p className="mb-8 text-lg">
+            Total: <strong>${Number(order.total).toFixed(2)}</strong>
+          </p>
+
+          <Link
+            to="/shop"
+            className="inline-block bg-[#4b5947] text-white px-8 py-4"
+          >
+            Continue Shopping
+          </Link>
+        </div>
+      </section>
+    );
+  }
 
   if (!cart.length) {
     return (
@@ -62,7 +148,9 @@ export default function CheckoutPage({ cart }) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <form onSubmit={handleSubmit} className="lg:col-span-2 space-y-7">
             <div>
-              <h2 className="text-xl font-serif mb-5">Contact Information</h2>
+              <h2 className="text-xl font-serif mb-5">
+                Contact Information
+              </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input
@@ -96,7 +184,9 @@ export default function CheckoutPage({ cart }) {
             </div>
 
             <div>
-              <h2 className="text-xl font-serif mb-5">Shipping Address</h2>
+              <h2 className="text-xl font-serif mb-5">
+                Shipping Address
+              </h2>
 
               <div className="space-y-4">
                 <input
@@ -130,11 +220,31 @@ export default function CheckoutPage({ cart }) {
               </div>
             </div>
 
+            <div className="border border-gray-300 p-5">
+              <h2 className="font-serif text-lg mb-2">
+                Payment Method
+              </h2>
+              <p className="text-sm text-gray-500">
+                Cash on Delivery
+              </p>
+            </div>
+
+            {error && (
+              <p className="text-red-600 text-sm">{error}</p>
+            )}
+
+            {!localStorage.getItem("authToken") && (
+              <p className="text-sm text-gray-600">
+                Please <Link to="/login" className="underline text-[#4b5947]">log in</Link> before placing your order.
+              </p>
+            )}
+
             <button
               type="submit"
-              className="w-full bg-[#4b5947] text-white py-4 hover:bg-[#394536] transition"
+              disabled={loading}
+              className="w-full bg-[#4b5947] text-white py-4 hover:bg-[#394536] transition disabled:opacity-60"
             >
-              Continue to Place Order
+              {loading ? "Placing Order..." : "Continue to Place Order"}
             </button>
 
             <p className="flex items-center justify-center gap-2 text-xs text-gray-500">
@@ -175,7 +285,9 @@ export default function CheckoutPage({ cart }) {
 
               <div className="flex justify-between">
                 <span>Shipping</span>
-                <span>{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</span>
+                <span>
+                  {shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}
+                </span>
               </div>
 
               <div className="flex justify-between border-t pt-4 font-semibold text-base">

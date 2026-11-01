@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 
 const app = express();
-
+app.use("/api/orders", orderRoutes);
 app.use(
   cors({
     origin: process.env.FRONTEND_URL || "http://localhost:5173",
