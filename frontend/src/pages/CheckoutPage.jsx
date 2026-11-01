@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowLeft, FiLock, FiCheckCircle } from "react-icons/fi";
@@ -19,7 +18,7 @@ export default function CheckoutPage({ cart, onOrderSuccess }) {
 
   const subtotal = cart.reduce(
     (total, item) => total + Number(item.price) * item.quantity,
-    0
+    0,
   );
 
   const shipping = subtotal >= 100 ? 0 : 10;
@@ -40,9 +39,7 @@ export default function CheckoutPage({ cart, onOrderSuccess }) {
       return;
     }
 
-    const invalidProduct = cart.some(
-      (item) => !item.id || !item.quantity
-    );
+    const invalidProduct = cart.some((item) => !item.id || !item.quantity);
 
     if (invalidProduct) {
       setError("A product in your cart has invalid information.");
@@ -71,7 +68,9 @@ export default function CheckoutPage({ cart, onOrderSuccess }) {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Unable to place order.");
+        throw new Error(
+          `${data.message || "Unable to place order."} ${data.error || ""}`,
+        );
       }
 
       setOrder(data.order);
@@ -148,9 +147,7 @@ export default function CheckoutPage({ cart, onOrderSuccess }) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <form onSubmit={handleSubmit} className="lg:col-span-2 space-y-7">
             <div>
-              <h2 className="text-xl font-serif mb-5">
-                Contact Information
-              </h2>
+              <h2 className="text-xl font-serif mb-5">Contact Information</h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input
@@ -184,9 +181,7 @@ export default function CheckoutPage({ cart, onOrderSuccess }) {
             </div>
 
             <div>
-              <h2 className="text-xl font-serif mb-5">
-                Shipping Address
-              </h2>
+              <h2 className="text-xl font-serif mb-5">Shipping Address</h2>
 
               <div className="space-y-4">
                 <input
@@ -221,21 +216,19 @@ export default function CheckoutPage({ cart, onOrderSuccess }) {
             </div>
 
             <div className="border border-gray-300 p-5">
-              <h2 className="font-serif text-lg mb-2">
-                Payment Method
-              </h2>
-              <p className="text-sm text-gray-500">
-                Cash on Delivery
-              </p>
+              <h2 className="font-serif text-lg mb-2">Payment Method</h2>
+              <p className="text-sm text-gray-500">Cash on Delivery</p>
             </div>
 
-            {error && (
-              <p className="text-red-600 text-sm">{error}</p>
-            )}
+            {error && <p className="text-red-600 text-sm">{error}</p>}
 
             {!localStorage.getItem("authToken") && (
               <p className="text-sm text-gray-600">
-                Please <Link to="/login" className="underline text-[#4b5947]">log in</Link> before placing your order.
+                Please{" "}
+                <Link to="/login" className="underline text-[#4b5947]">
+                  log in
+                </Link>{" "}
+                before placing your order.
               </p>
             )}
 

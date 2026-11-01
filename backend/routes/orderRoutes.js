@@ -70,14 +70,13 @@ router.post("/", authenticate, async (req, res) => {
         });
       }
 
-      orderItems.push({
-        product: product._id,
-        name: product.name,
-        image: product.image,
-        price: product.price,
-        quantity: Number(item.quantity),
-      });
-
+ orderItems.push({
+  product: product._id,
+  name: product.name,
+  image: product.images?.[0] || "https://placehold.co/400x500?text=Product",
+  price: product.price,
+  quantity: Number(item.quantity),
+});
       subtotal += product.price * Number(item.quantity);
     }
 
