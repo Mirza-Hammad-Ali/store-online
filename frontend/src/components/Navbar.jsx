@@ -68,7 +68,7 @@ function Navbar({ bagCount = 0 }) {
             </Link>
 
             <Link
-              to="/shop"
+              to="/cart"
               className="flex h-10 items-center gap-2 text-[12px] font-medium tracking-[0.04em] transition-colors hover:text-[#69745f]"
               aria-label={`Visit the shop, bag has ${bagCount} items`}
             >
