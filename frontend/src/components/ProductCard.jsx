@@ -5,7 +5,7 @@ function ProductCard({ product, onAddToCart }) {
     <article className="group">
       <div className="relative aspect-[4/4.7] overflow-hidden bg-[#efeee9]">
         <img
-          src={product.image}
+          src={product.images?.[0] || product.image || ""}
           alt={product.name}
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
