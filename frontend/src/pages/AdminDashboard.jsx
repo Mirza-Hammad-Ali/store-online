@@ -11,7 +11,6 @@ const menuItems = [
   { title: "Settings", icon: "⚙️" },
 ];
 
-
 const initialForm = {
   name: "",
   category: "Wearables",
@@ -125,7 +124,7 @@ export default function AdminDashboard() {
       name: product.name || "",
       category: product.category || "Wearables",
       price: String(product.price ?? ""),
-      image: product.image || "",
+      image: product.images?.[0] || product.image || "",
       tag: product.tag || "",
       description: product.description || "",
       stock: String(product.stock ?? 0),
@@ -150,10 +149,13 @@ export default function AdminDashboard() {
 
     const productData = {
       ...form,
+      images: form.image.trim() ? [form.image.trim()] : [],
       price: Number(form.price),
       stock: Number(form.stock),
       status: "active",
     };
+
+    delete productData.image;
 
     if (
       !productData.name.trim() ||
