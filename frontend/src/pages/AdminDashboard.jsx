@@ -733,7 +733,7 @@ export default function AdminDashboard() {
                               <td className="px-5 py-4">
                                 <div className="flex items-center gap-3">
                                   <img
-                                    src={product.image}
+                                   src={product.images?.[0] || product.image || ""}
                                     alt={product.name}
                                     className="h-12 w-12 rounded-lg bg-gray-100 object-cover"
                                   />
