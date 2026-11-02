@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Product = require("../models/product");
+
 const {
   authenticate,
   adminOnly,
@@ -11,13 +12,16 @@ const router = express.Router();
 
 // Convert MongoDB product into frontend format
 function formatProduct(product) {
+  const images = product.images || [];
+
   return {
     id: product._id.toString(),
     name: product.name,
     category: product.category,
     price: product.price,
-    tag: product.tag,
-    image: product.image,
+    tag: product.tag || "",
+    images,
+    image: images[0] || "",
     description: product.description,
     stock: product.stock,
     status: product.status,
@@ -32,6 +36,7 @@ router.get("/", async (req, res) => {
 
     res.json({ products: products.map(formatProduct) });
   } catch (error) {
+    console.error("Fetch products error:", error);
     res.status(500).json({ message: "Unable to fetch products." });
   }
 });
@@ -54,6 +59,7 @@ router.get("/:id", async (req, res) => {
 
     res.json({ product: formatProduct(product) });
   } catch (error) {
+    console.error("Get product error:", error);
     res.status(500).json({ message: "Unable to fetch product." });
   }
 });
@@ -61,8 +67,24 @@ router.get("/:id", async (req, res) => {
 // ADD product - Admin only
 router.post("/", authenticate, adminOnly, async (req, res) => {
   try {
-    const { name, category, price, tag, image, description, stock, status } =
-      req.body;
+    const {
+      name,
+      category,
+      price,
+      tag,
+      images,
+      image,
+      description,
+      stock,
+      status,
+    } = req.body;
+
+    // Support both new images array and old image string
+    const productImages = Array.isArray(images)
+      ? images
+      : typeof image === "string"
+        ? [image]
+        : [];
 
     if (
       typeof name !== "string" ||
@@ -71,17 +93,18 @@ router.post("/", authenticate, adminOnly, async (req, res) => {
       typeof price !== "number" ||
       !Number.isFinite(price) ||
       price < 0 ||
-      typeof image !== "string" ||
-      !image.trim() ||
-      image.trim().length > 2048 ||
+      !productImages.length ||
+      productImages.some(
+        (url) => typeof url !== "string" || !url.trim() || url.length > 2048
+      ) ||
+      typeof description !== "string" ||
+      !description.trim() ||
       (tag !== undefined && typeof tag !== "string") ||
-      (description !== undefined && typeof description !== "string") ||
-      (stock !== undefined &&
-        (!Number.isInteger(stock) || stock < 0)) ||
-      (status !== undefined && !["active", "draft"].includes(status))
+      (stock !== undefined && (!Number.isInteger(stock) || stock < 0)) ||
+      (status !== undefined && !["active", "draft", "out_of_stock"].includes(status))
     ) {
       return res.status(400).json({
-        message: "Please provide valid product details.",
+        message: "Please provide valid product details, including image and description.",
       });
     }
 
@@ -90,8 +113,8 @@ router.post("/", authenticate, adminOnly, async (req, res) => {
       category,
       price,
       tag: tag || "",
-      image: image.trim(),
-      description: description || "",
+      images: productImages.map((url) => url.trim()),
+      description: description.trim(),
       stock: stock ?? 0,
       status: status || "active",
     });
@@ -101,7 +124,10 @@ router.post("/", authenticate, adminOnly, async (req, res) => {
       product: formatProduct(product),
     });
   } catch (error) {
-    res.status(500).json({ message: "Unable to add product." });
+    console.error("Add product error:", error);
+    res.status(500).json({
+      message: error.message || "Unable to add product.",
+    });
   }
 });
 
@@ -117,6 +143,7 @@ router.put("/:id", authenticate, adminOnly, async (req, res) => {
       "category",
       "price",
       "tag",
+      "images",
       "image",
       "description",
       "stock",
@@ -131,6 +158,13 @@ router.put("/:id", authenticate, adminOnly, async (req, res) => {
       }
     }
 
+    // Convert old image string into images array
+    if (updates.image !== undefined && updates.images === undefined) {
+      updates.images = [updates.image];
+    }
+
+    delete updates.image;
+
     if (
       Object.keys(updates).length === 0 ||
       (updates.name !== undefined &&
@@ -142,22 +176,31 @@ router.put("/:id", authenticate, adminOnly, async (req, res) => {
           !Number.isFinite(updates.price) ||
           updates.price < 0)) ||
       (updates.tag !== undefined && typeof updates.tag !== "string") ||
-      (updates.image !== undefined &&
-        (typeof updates.image !== "string" ||
-          !updates.image.trim() ||
-          updates.image.length > 2048)) ||
+      (updates.images !== undefined &&
+        (!Array.isArray(updates.images) ||
+          updates.images.length === 0 ||
+          updates.images.some(
+            (url) => typeof url !== "string" || !url.trim() || url.length > 2048
+          ))) ||
       (updates.description !== undefined &&
-        typeof updates.description !== "string") ||
+        (typeof updates.description !== "string" || !updates.description.trim())) ||
       (updates.stock !== undefined &&
         (!Number.isInteger(updates.stock) || updates.stock < 0)) ||
       (updates.status !== undefined &&
-        !["active", "draft"].includes(updates.status))
+        !["active", "draft", "out_of_stock"].includes(updates.status))
     ) {
       return res.status(400).json({ message: "Invalid product updates." });
     }
 
     if (updates.name) updates.name = updates.name.trim();
-    if (updates.image) updates.image = updates.image.trim();
+
+    if (updates.images) {
+      updates.images = updates.images.map((url) => url.trim());
+    }
+
+    if (updates.description) {
+      updates.description = updates.description.trim();
+    }
 
     const product = await Product.findByIdAndUpdate(
       req.params.id,
@@ -174,7 +217,10 @@ router.put("/:id", authenticate, adminOnly, async (req, res) => {
       product: formatProduct(product),
     });
   } catch (error) {
-    res.status(500).json({ message: "Unable to update product." });
+    console.error("Update product error:", error);
+    res.status(500).json({
+      message: error.message || "Unable to update product.",
+    });
   }
 });
 
@@ -193,6 +239,7 @@ router.delete("/:id", authenticate, adminOnly, async (req, res) => {
 
     res.json({ message: "Product deleted successfully." });
   } catch (error) {
+    console.error("Delete product error:", error);
     res.status(500).json({ message: "Unable to delete product." });
   }
 });
