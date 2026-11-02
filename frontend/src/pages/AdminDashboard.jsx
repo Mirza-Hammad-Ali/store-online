@@ -159,13 +159,16 @@ export default function AdminDashboard() {
 
     if (
       !productData.name.trim() ||
-      !productData.image.trim() ||
+      !productData.images?.[0]?.trim() ||
+      !productData.description.trim() ||
       !Number.isFinite(productData.price) ||
       productData.price < 0 ||
       !Number.isInteger(productData.stock) ||
       productData.stock < 0
     ) {
-      setProductError("Please enter valid product information.");
+      setProductError(
+        "Please enter valid product information, including image and description.",
+      );
       return;
     }
 
@@ -637,6 +640,7 @@ export default function AdminDashboard() {
                           value={form.description}
                           onChange={handleFormChange}
                           rows="3"
+                          required
                           placeholder="Write a short product description..."
                           className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-orange-500"
                         />
@@ -733,7 +737,9 @@ export default function AdminDashboard() {
                               <td className="px-5 py-4">
                                 <div className="flex items-center gap-3">
                                   <img
-                                   src={product.images?.[0] || product.image || ""}
+                                    src={
+                                      product.images?.[0] || product.image || ""
+                                    }
                                     alt={product.name}
                                     className="h-12 w-12 rounded-lg bg-gray-100 object-cover"
                                   />
