@@ -736,10 +736,11 @@ export default function AdminDashboard() {
                             <tr key={product.id} className="hover:bg-gray-50">
                               <td className="px-5 py-4">
                                 <div className="flex items-center gap-3">
-                                  <img
-                                    src={
-                                      product.images?.[0] || product.image || ""
-                                    }
+                                <img
+  src={product.images?.[0] || product.image || undefined}
+  alt={product.name}
+  className="h-12 w-12 rounded-lg bg-gray-100 object-cover"
+/>
                                     alt={product.name}
                                     className="h-12 w-12 rounded-lg bg-gray-100 object-cover"
                                   />
