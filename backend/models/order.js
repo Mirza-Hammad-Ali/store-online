@@ -6,7 +6,6 @@ const orderSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-
     items: [
       {
         product: {
@@ -83,7 +82,7 @@ const orderSchema = new mongoose.Schema(
       default: "pending",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = mongoose.model("Order", orderSchema);
