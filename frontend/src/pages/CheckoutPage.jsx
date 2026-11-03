@@ -40,15 +40,12 @@ export default function CheckoutPage({ cart, onOrderSuccess }) {
     }
 
     const invalidProduct = cart.some((item) => !item.id || !item.quantity);
-
     if (invalidProduct) {
       setError("A product in your cart has invalid information.");
       return;
     }
-
     try {
       setLoading(true);
-
       const response = await fetch("http://localhost:5000/api/orders", {
         method: "POST",
         headers: {
