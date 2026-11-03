@@ -16,7 +16,6 @@ router.post("/", authenticate, async (req, res) => {
     if (!Array.isArray(items) || items.length === 0) {
       return res.status(400).json({ message: "Your cart is empty." });
     }
-
     const requiredFields = [
       "name",
       "email",
