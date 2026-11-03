@@ -1,12 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
 const Order = require("../models/order");
 const Product = require("../models/product");
 const { authenticate, adminOnly } = require("../middleware/authMiddleware");
-
 const router = express.Router();
-
 // PLACE NEW ORDER
 router.post("/", authenticate, async (req, res) => {
   try {
