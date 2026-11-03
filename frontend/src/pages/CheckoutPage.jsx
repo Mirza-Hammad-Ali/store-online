@@ -33,12 +33,10 @@ export default function CheckoutPage({ cart, onOrderSuccess }) {
     setError("");
 
     const token = localStorage.getItem("authToken");
-
     if (!token) {
       setError("Please log in before placing your order.");
       return;
     }
-
     const invalidProduct = cart.some((item) => !item.id || !item.quantity);
     if (invalidProduct) {
       setError("A product in your cart has invalid information.");
