@@ -690,12 +690,10 @@ export default function AdminDashboard() {
                     </div>
                   </form>
                 )}
-
                 {/* Products list */}
                 <div className="mt-6 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
                   <div className="flex flex-wrap items-center justify-between gap-3 border-b p-5">
                     <h3 className="font-bold">All Products</h3>
-
                     <button
                       onClick={loadProducts}
                       disabled={productsLoading}
@@ -704,7 +702,6 @@ export default function AdminDashboard() {
                       ↻ Refresh
                     </button>
                   </div>
-
                   {productsLoading ? (
                     <p className="p-10 text-center text-sm text-gray-500">
                       Loading products...
