@@ -6,9 +6,7 @@ const filters = ["All pieces", "Wearables", "Accessories", "Living"];
 
 function ShopPage({ onAddToBag }) {
   const [searchParams] = useSearchParams();
-
   const startingCategory = searchParams.get("category");
-
   const [activeFilter, setActiveFilter] = useState(
     filters.includes(startingCategory) ? startingCategory : "All pieces",
   );
@@ -80,7 +78,9 @@ function ShopPage({ onAddToBag }) {
           </div>
 
           <p className="text-[11px] text-[#77776e]">
-            {loading ? "Loading pieces..." : `${filteredProducts.length} thoughtful pieces`}
+            {loading
+              ? "Loading pieces..."
+              : `${filteredProducts.length} thoughtful pieces`}
           </p>
         </div>
       </div>
@@ -130,10 +130,7 @@ function ShopPage({ onAddToBag }) {
 
       {/* Products */}
       {!loading && !error && filteredProducts.length > 0 && (
-        <ProductGrid
-          products={filteredProducts}
-          onAddToCart={onAddToBag}
-        />
+        <ProductGrid products={filteredProducts} onAddToCart={onAddToBag} />
       )}
 
       {/* Empty products */}
