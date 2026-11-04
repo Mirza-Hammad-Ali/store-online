@@ -37,6 +37,12 @@ export default function AdminDashboard() {
   const [showForm, setShowForm] = useState(false);
   const [savingProduct, setSavingProduct] = useState(false);
 
+  // Order states
+  const [orders, setOrders] = useState([]);
+  const [ordersLoading, setOrdersLoading] = useState(false);
+  const [orderError, setOrderError] = useState("");
+  const [updatingOrderId, setUpdatingOrderId] = useState(null);
+
   // Load products from MongoDB
   const loadProducts = useCallback(async () => {
     try {
