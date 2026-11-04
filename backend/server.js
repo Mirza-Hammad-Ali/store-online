@@ -7,9 +7,7 @@ require("dotenv").config();
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
-
 const app = express();
-
 // 1. CORS MUST COME BEFORE API ROUTES
 app.use(
   cors({
