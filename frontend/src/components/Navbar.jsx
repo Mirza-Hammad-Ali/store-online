@@ -59,21 +59,18 @@ function Navbar({ bagCount = 0 }) {
             >
               Login
             </Link>
-
             <Link
               to="/signup"
               className="flex h-9 items-center justify-center rounded-sm bg-[#4b5947] px-3 text-[11px] font-medium tracking-[0.03em] text-white transition-colors hover:bg-[#394536] sm:h-10 sm:px-5 sm:text-[12px]"
             >
               Sign Up
             </Link>
-
             <Link
               to="/cart"
               className="flex h-10 items-center gap-2 text-[12px] font-medium tracking-[0.04em] transition-colors hover:text-[#69745f]"
               aria-label={`Visit the shop, bag has ${bagCount} items`}
             >
               <span className="hidden lg:inline">Explore</span>
-
               <span className="relative">
                 <FiShoppingBag
                   className="h-[18px] w-[18px]"
