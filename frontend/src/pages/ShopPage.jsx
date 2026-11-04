@@ -18,22 +18,17 @@ function ShopPage({ onAddToBag }) {
   // Fetch products from MongoDB through backend API
   useEffect(() => {
     const controller = new AbortController();
-
     async function fetchProducts() {
       try {
         setLoading(true);
         setError("");
-
         const response = await fetch("http://localhost:5000/api/products", {
           signal: controller.signal,
         });
-
         if (!response.ok) {
           throw new Error("Unable to load products.");
         }
-
         const data = await response.json();
-
         setProducts(data.products || []);
       } catch (err) {
         if (err.name !== "AbortError") {
