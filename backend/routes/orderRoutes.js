@@ -70,13 +70,14 @@ router.post("/", authenticate, async (req, res) => {
         });
       }
 
- orderItems.push({
-  product: product._id,
-  name: product.name,
-  image: product.images?.[0] || "https://placehold.co/400x500?text=Product",
-  price: product.price,
-  quantity: Number(item.quantity),
-});
+      orderItems.push({
+        product: product._id,
+        name: product.name,
+        image:
+          product.images?.[0] || "https://placehold.co/400x500?text=Product",
+        price: product.price,
+        quantity: Number(item.quantity),
+      });
       subtotal += product.price * Number(item.quantity);
     }
 
@@ -112,7 +113,7 @@ router.get("/my-orders", authenticate, async (req, res) => {
     const orders = await Order.find({
       user: req.user.id,
     })
-      .populate("items.product", "name image")
+      .populate("items.product", "name images price")
       .sort({ createdAt: -1 });
 
     res.json({ orders });
@@ -126,8 +127,9 @@ router.get("/", authenticate, adminOnly, async (req, res) => {
   try {
     const orders = await Order.find()
       .populate("user", "name email")
+      .populate("items.product", "name images price")
       .sort({ createdAt: -1 });
-
+      
     res.json({ orders });
   } catch (error) {
     res.status(500).json({ message: error.message });
