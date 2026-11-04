@@ -129,7 +129,7 @@ router.get("/", authenticate, adminOnly, async (req, res) => {
       .populate("user", "name email")
       .populate("items.product", "name images price")
       .sort({ createdAt: -1 });
-      
+
     res.json({ orders });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -149,7 +149,11 @@ router.patch("/:id/status", authenticate, adminOnly, async (req, res) => {
     ];
 
     const { status } = req.body;
-
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({
+        message: "Invalid order ID.",
+      });
+    }
     if (!allowedStatuses.includes(status)) {
       return res.status(400).json({
         message: "Invalid order status.",
