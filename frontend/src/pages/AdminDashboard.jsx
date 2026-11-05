@@ -64,11 +64,43 @@ export default function AdminDashboard() {
     }
   }, []);
 
+  // Load all orders from MongoDB
+  const loadOrders = useCallback(async () => {
+    try {
+      setOrdersLoading(true);
+      setOrderError("");
+
+      const token = localStorage.getItem("authToken");
+
+      const response = await fetch("http://localhost:5000/api/orders", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Could not load orders.");
+      }
+
+      setOrders(data.orders || []);
+    } catch (error) {
+      setOrderError(error.message || "Something went wrong.");
+    } finally {
+      setOrdersLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     if (activeMenu === "Products") {
       loadProducts();
     }
-  }, [activeMenu, loadProducts]);
+
+    if (activeMenu === "Orders") {
+      loadOrders();
+    }
+  }, [activeMenu, loadProducts, loadOrders]);
 
   // Verify admin access
   async function verifyAdminAccess() {
