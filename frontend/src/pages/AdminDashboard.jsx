@@ -23,7 +23,6 @@ const initialForm = {
 
 export default function AdminDashboard() {
   const { user, logout } = useAuth();
-
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [activeMenu, setActiveMenu] = useState("Dashboard");
