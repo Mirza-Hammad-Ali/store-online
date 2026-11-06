@@ -43,22 +43,27 @@ a {
   color: #fff;
   background: #4b5947;
 }
+
 .font-display {
   font-family: 'Playfair Display', Georgia, serif;
 }
+
 .page-fade {
   animation: page-fade 450ms ease both;
 }
+
 @keyframes page-fade {
   from {
     opacity: 0;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
 
   *,

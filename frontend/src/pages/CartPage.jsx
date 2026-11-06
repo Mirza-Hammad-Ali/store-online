@@ -18,7 +18,7 @@ export default function CartPage({ cart, updateQuantity, removeFromCart }) {
         </p>
 
         <h1 className="font-display text-[45px] leading-tight tracking-[-0.04em] sm:text-[58px]">
-          Shopping bag
+          Shop bag
         </h1>
 
         <p className="mt-3 text-sm text-[#77776e]">
