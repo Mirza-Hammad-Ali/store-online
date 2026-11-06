@@ -86,7 +86,6 @@ export default function CartPage({ cart, updateQuantity, removeFromCart }) {
                       </button>
                     </div>
                   </div>
-
                   {/* Quantity */}
                   <div className="flex items-center gap-3">
                     <button
@@ -98,11 +97,9 @@ export default function CartPage({ cart, updateQuantity, removeFromCart }) {
                     >
                       <FiMinus size={12} />
                     </button>
-
                     <span className="min-w-4 text-center text-sm">
                       {item.quantity}
                     </span>
-
                     <button
                       type="button"
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
@@ -112,14 +109,12 @@ export default function CartPage({ cart, updateQuantity, removeFromCart }) {
                       <FiPlus size={12} />
                     </button>
                   </div>
-
                   <p className="text-sm font-semibold sm:text-right">
                     ${(Number(item.price) * item.quantity).toFixed(2)}
                   </p>
                 </article>
               ))}
             </div>
-
             <Link
               to="/shop"
               className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#69745f] hover:text-[#394536]"
