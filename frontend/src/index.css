@@ -12,11 +12,9 @@
   font-optical-sizing: auto;
   font-weight: 400;
 }
-
 * {
   box-sizing: border-box;
 }
-
 html {
   min-width: 320px;
   scroll-behavior: smooth;
