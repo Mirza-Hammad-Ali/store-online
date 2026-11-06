@@ -70,15 +70,12 @@ export default function CartPage({ cart, updateQuantity, removeFromCart }) {
 
                     <div className="flex flex-col justify-center">
                       <h3 className="text-sm font-semibold">{item.name}</h3>
-
                       <p className="mt-1 text-xs text-[#88877e]">
                         {item.category}
                       </p>
-
                       <p className="mt-2 text-sm font-medium">
                         ${Number(item.price).toFixed(2)}
                       </p>
-
                       <button
                         type="button"
                         onClick={() => removeFromCart(item.id)}
