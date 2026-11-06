@@ -34,7 +34,7 @@ export default function CartPage({ cart, updateQuantity, removeFromCart }) {
           <h2 className="mt-6 font-display text-3xl">Your bag is waiting</h2>
 
           <p className="mt-3 text-sm text-[#77776e]">
-            Looks like you haven't added anything yet.
+            Why you haven't added anything yet.
           </p>
 
           <Link
